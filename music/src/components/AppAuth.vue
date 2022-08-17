@@ -38,20 +38,32 @@
           <ul class="flex flex-wrap mb-4">
             <li class="flex-auto text-center">
               <a
-                class="block rounded py-3 px-4 transition hover:text-white text-white bg-blue-600"
+                class="block rounded py-3 px-4 transition"
                 href="#"
+                @click.prevent="tab = 'login'"
+                :class="{
+                  'hover:text-white text-white bg-blue-600': tab === 'login',
+                  'hover:text-blue-600': tab === 'register',
+                }"
                 >Login</a
               >
             </li>
             <li class="flex-auto text-center">
-              <a class="block rounded py-3 px-4 transition" href="#"
+              <a
+                class="block rounded py-3 px-4 transition"
+                href="#"
+                :class="{
+                  'hover:text-white text-white bg-blue-600': tab !== 'login',
+                  'hover:text-blue-600': tab !== 'register',
+                }"
+                @click.prevent="tab = 'register'"
                 >Register</a
               >
             </li>
           </ul>
 
           <!-- Login Form -->
-          <form>
+          <form v-show="tab === 'login'">
             <!-- Email -->
             <div class="mb-3">
               <label class="inline-block mb-2">Email</label>
@@ -78,7 +90,7 @@
             </button>
           </form>
           <!-- Registration Form -->
-          <form>
+          <form v-show="tab === 'register'">
             <!-- Name -->
             <div class="mb-3">
               <label class="inline-block mb-2">Name</label>
@@ -156,18 +168,20 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'AppAuth',
+  data() {
+    return {
+      tab: 'login',
+    };
+  },
   methods: {
     ...mapActions(['setFalseAction']),
   },
   computed: {
     ...mapGetters(['hiddenClass']),
-    ...mapState({
-      isOpen: (state) => state.isOpen,
-    }),
   },
 };
 </script>
