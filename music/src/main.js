@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
-import { store } from './stores/counterVuex.js';
+import { store } from './stores/counter copy.js';
 
 import App from './App.vue';
 import router from './router';
