@@ -20,4 +20,7 @@ module.exports = {
   env: {
     node: true,
   },
+  rules: {
+    'vue/mulit-word-component-name-casing': 'off',
+  },
 };
