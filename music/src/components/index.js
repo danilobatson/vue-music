@@ -4,6 +4,7 @@ import LoginForm from './LoginForm.vue';
 import RegistrationForm from './RegistrationForm.vue';
 import CompositionItem from './CompositionItem.vue';
 import Upload from './Upload.vue';
+import SongItem from './SongItem.vue';
 
 export {
   AppHeader,
@@ -12,4 +13,5 @@ export {
   LoginForm,
   RegistrationForm,
   CompositionItem,
+  SongItem,
 };
