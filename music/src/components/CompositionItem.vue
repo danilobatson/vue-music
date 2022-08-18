@@ -10,6 +10,7 @@
     <div v-show="!showForm">
       <h4 class="inline-block text-2xl font-bold">{{ song.modifiedName }}</h4>
       <button
+        @click.prevent="deleteSong"
         class="ml-1 py-1 px-2 text-sm rounded text-white bg-red-600 float-right"
       >
         <i class="fa fa-times"></i>
@@ -30,6 +31,7 @@
         <div class="mb-3">
           <label class="inline-block mb-2">Song Title</label>
           <vee-field
+            @input="updateUnsavedFlag(true)"
             name="modifiedName"
             type="text"
             class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
@@ -40,6 +42,7 @@
         <div class="mb-3">
           <label class="inline-block mb-2">Genre</label>
           <vee-field
+            @input="updateUnsavedFlag(true)"
             name="genre"
             type="text"
             class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
@@ -68,7 +71,7 @@
 </template>
 
 <script>
-import { songsCollections } from '@/includes/firebase';
+import { songsCollections, storage } from '@/includes/firebase';
 
 export default {
   name: 'CompositionItem',
@@ -98,8 +101,26 @@ export default {
       type: Number,
       required: true,
     },
+    removeSong: {
+      type: Function,
+      required: true,
+    },
+    updateUnsavedFlag: {
+      type: Function,
+    },
   },
   methods: {
+    async deleteSong() {
+      const storageRef = storage.ref();
+      const songRef = storageRef.child(`songs/${this.song.originalName}`);
+
+      await songRef.delete();
+
+      await songsCollections.doc(this.song.docID).delete();
+
+      this.removeSong(this.index);
+    },
+
     async edit(values) {
       this.inSubmission = true;
       this.alertVariant = 'bg-blue-500';
@@ -121,6 +142,7 @@ export default {
       this.alertMsg = 'Success';
       this.showAlert = true;
       this.showForm = false;
+      this.updateUnsavedFlag(false);
     },
   },
 };
