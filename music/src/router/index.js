@@ -8,6 +8,7 @@ const routes = [
   { path: '/about', name: 'about', component: About },
   { path: '/manage-music', name: 'manage', component: Manage },
   { path: '/manage', redirect: { name: 'manage' } },
+  { path: '/:catchAll(.*)*', redirect: { name: 'home' } },
 ];
 
 const router = createRouter({
