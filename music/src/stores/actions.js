@@ -4,7 +4,8 @@ export default {
   setFalseAction({ commit }) {
     commit('setFalseMutation');
   },
-  logOutAction({ commit }) {
+  async signOut({ commit }) {
+    await auth.signOut();
     commit('userLogOut');
   },
   logInAction({ commit }) {

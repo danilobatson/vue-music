@@ -134,7 +134,7 @@ export default {
   methods: {
     ...mapActions({
       createUser: 'register',
-    }),  
+    }),
     async register(values) {
       this.regShowAlert = true;
       this.regInSubmission = true;
@@ -149,9 +149,10 @@ export default {
         this.regAlertMsg = 'An unexpted error occured. Please try again later.';
         return;
       }
-
+ 
       this.regAlertVariant = 'bg-green-500';
       this.regAlertMsg = 'Success! Your account has been created.';
+      window.location.reload();
       console.log(this.$store.state.userLoggedIn);
     },
   },
