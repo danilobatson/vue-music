@@ -31,7 +31,10 @@
               >
             </li>
             <li>
-              <a class="px-2 text-white" href="#" @click.prevent="signOut"
+              <a
+                class="px-2 text-white"
+                href="#"
+                @click.prevent="signOutAndRedirect"
                 >Logout</a
               >
             </li>
@@ -51,6 +54,12 @@ export default {
     ...mapActions(['signOut']),
     toggleAuthModal() {
       this.$store.state.isOpen = !this.$store.state.isOpen;
+    },
+    signOutAndRedirect() {
+      this.signOut();
+      if (this.$route.meta.requiresAuth) {
+        this.$router.push({ name: 'home' });
+      }
     },
   },
   computed: {
