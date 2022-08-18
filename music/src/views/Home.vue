@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { songsCollections } from '@/includes/firebase';
+import { songsCollection } from '@/includes/firebase';
 import { SongItem } from '@/components';
 export default {
   name: 'Home',
@@ -67,16 +67,16 @@ export default {
       this.pendingRequest = true;
       let snapshots;
       if (this.songs.length) {
-        const lastDoc = await songsCollections
+        const lastDoc = await songsCollection
           .doc(this.songs[this.songs.length - 1].docID)
           .get();
-        snapshots = await songsCollections
+        snapshots = await songsCollection
           .orderBy('modifiedName')
           .startAfter(lastDoc)
           .limit(this.maxPerPage)
           .get();
       } else {
-        snapshots = await songsCollections
+        snapshots = await songsCollection
           .orderBy('modifiedName')
           .limit(this.maxPerPage)
           .get();

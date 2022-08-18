@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import { songsCollections, storage } from '@/includes/firebase';
+import { songsCollection, storage } from '@/includes/firebase';
 
 export default {
   name: 'CompositionItem',
@@ -116,7 +116,7 @@ export default {
 
       await songRef.delete();
 
-      await songsCollections.doc(this.song.docID).delete();
+      await songsCollection.doc(this.song.docID).delete();
 
       this.removeSong(this.index);
     },
@@ -127,7 +127,7 @@ export default {
       this.alertMsg = 'Please wait. Uploading song info';
 
       try {
-        await songsCollections.doc(this.song.docID).update(values);
+        await songsCollection.doc(this.song.docID).update(values);
       } catch (err) {
         this.inSubmission = false;
         this.alertVariant = 'bg-red-500';

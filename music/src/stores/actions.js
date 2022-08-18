@@ -1,4 +1,4 @@
-import { auth, usersCollections } from '@/includes/firebase';
+import { auth, usersCollection } from '@/includes/firebase';
 
 export default {
   setFalseAction({ commit }) {
@@ -17,7 +17,7 @@ export default {
       values.password
     );
 
-    await usersCollections.doc(userCred.user.uid).set({
+    await usersCollection.doc(userCred.user.uid).set({
       name: values.name,
       email: values.email,
       age: values.age,

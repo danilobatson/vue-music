@@ -34,7 +34,7 @@
 
 <script>
 import { Upload, CompositionItem } from '@/components';
-import { songsCollections, auth } from '@/includes/firebase';
+import { songsCollection, auth } from '@/includes/firebase';
 export default {
   name: 'Manage',
   components: { Upload, CompositionItem },
@@ -61,7 +61,7 @@ export default {
     },
   },
   async created() {
-    const snapshot = await songsCollections
+    const snapshot = await songsCollection
       .where('uid', '==', auth.currentUser.uid)
       .get();
 

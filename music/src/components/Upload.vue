@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { storage, auth, songsCollections } from '@/includes/firebase';
+import { storage, auth, songsCollection } from '@/includes/firebase';
 
 export default {
   name: 'Upload',
@@ -110,7 +110,7 @@ export default {
             };
 
             song.url = await task.snapshot.ref.getDownloadURL();
-            const songRef = await songsCollections.add(song);
+            const songRef = await songsCollection.add(song);
             const songSnapshot = await songRef.get();
 
             this.addSong(songSnapshot);

@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from '@/views/Home.vue';
-import About from '@/views/About.vue';
-import Manage from '@/views/Manage.vue';
+import { Home, About, Song, Manage } from '@/views';
+
 import { auth } from '@/includes/firebase';
 
 const routes = [
   { path: '/', name: 'home', component: Home },
   { path: '/about', name: 'about', component: About },
+  { path: '/song/:id', name: 'song', component: Song },
   {
     path: '/manage-music',
     name: 'manage',
