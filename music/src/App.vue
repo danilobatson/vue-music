@@ -272,12 +272,23 @@
 
 <script>
 import { AppHeader, AppAuth } from '@/components';
-
+import { mapState } from 'vuex';
+import { auth } from './includes/firebase';
 export default {
   name: 'App',
   components: {
     AppHeader,
     AppAuth,
+  },
+  computed: {
+    ...mapState({
+      userLoggedIn: (state) => state.userLoggedIn,
+    }),
+  },
+  created() {
+    if (auth.currentUser) {
+      this.$store.state.userLoggedIn = true;
+    }
   },
 };
 </script>

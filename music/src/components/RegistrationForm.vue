@@ -132,16 +132,27 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['setFalseAction']),
-    register(values) {
+    ...mapActions({
+      createUser: 'register',
+    }),  
+    async register(values) {
       this.regShowAlert = true;
       this.regInSubmission = true;
       this.regAlertVariant = 'bg-blue-500';
       this.regAlertMsg = 'Please wait. Your account is being created.';
 
+      try {
+        await this.createUser(values);
+      } catch (error) {
+        this.regInSubmission = false;
+        this.regAlertVariant = 'bg-red-500';
+        this.regAlertMsg = 'An unexpted error occured. Please try again later.';
+        return;
+      }
+
       this.regAlertVariant = 'bg-green-500';
       this.regAlertMsg = 'Success! Your account has been created.';
-      console.log(values);
+      console.log(this.$store.state.userLoggedIn);
     },
   },
 };
