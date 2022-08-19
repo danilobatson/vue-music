@@ -8,6 +8,7 @@
     <div class="container mx-auto flex items-center">
       <!-- Play/Pause Button -->
       <button
+        @click.prevent="newSong(song)"
         type="button"
         class="z-50 h-24 w-24 text-3xl bg-white text-black rounded-full focus:outline-none"
       >
@@ -88,6 +89,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import { songsCollection, commentsCollection, auth } from '@/includes/firebase';
 export default {
   name: 'Song',
@@ -107,6 +109,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions('player', ['newSong']),
     async addComment(values, { resetForm }) {
       this.commentInSubmission = true;
       this.commentShowAlert = true;
