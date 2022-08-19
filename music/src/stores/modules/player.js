@@ -8,7 +8,6 @@ const getters = {};
 // actions
 const actions = {
   async newSong({ commit }, song) {
-    console.log('action hit');
     commit('newSong', song);
   },
 };
@@ -16,9 +15,7 @@ const actions = {
 // mutations
 const mutations = {
   newSong(state, song) {
-    console.log('mutation hit');
     state.currentSong = song;
-    console.log(state.currentSong);
   },
 };
 

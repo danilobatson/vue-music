@@ -87,10 +87,10 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['setFalseAction']),
+    ...mapActions('modal', ['setFalseAction']),
   },
   computed: {
-    ...mapGetters(['hiddenClass']),
+    ...mapGetters('modal', ['hiddenClass']),
   },
 };
 </script>

@@ -53,7 +53,7 @@ export default {
   methods: {
     ...mapActions(['signOut']),
     toggleAuthModal() {
-      this.$store.state.isOpen = !this.$store.state.isOpen;
+      this.$store.state.modal.isOpen = !this.$store.state.modal.isOpen;
     },
     signOutAndRedirect() {
       this.signOut();
@@ -63,8 +63,10 @@ export default {
     },
   },
   computed: {
-    ...mapState({
+    ...mapState('modal', {
       isOpen: (state) => state.isOpen,
+    }),
+    ...mapState({
       userLoggedIn: (state) => state.userLoggedIn,
     }),
   },

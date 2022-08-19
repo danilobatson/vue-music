@@ -146,10 +146,11 @@ export default {
       } catch (error) {
         this.regInSubmission = false;
         this.regAlertVariant = 'bg-red-500';
-        this.regAlertMsg = 'An unexp ted error occured. Please try again later.';
+        this.regAlertMsg =
+          'An unexp ted error occured. Please try again later.';
         return;
       }
- 
+
       this.regAlertVariant = 'bg-green-500';
       this.regAlertMsg = 'Success! Your account has been created.';
       window.location.reload();

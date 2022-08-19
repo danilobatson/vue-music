@@ -1,16 +1,16 @@
 import { createStore } from 'vuex';
 import state from './state';
-import getters from './getters';
-import actions from './actions';
 import mutations from './mutations';
+import actions from './actions';
 import player from './modules/player';
+import modal from './modules/modal';
 
 export const store = createStore({
   modules: {
     player,
+    modal,
   },
   state,
-  getters,
   actions,
   mutations,
 });

@@ -59,13 +59,13 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['setFalseAction', 'authenticate']),
+    ...mapActions('modal', ['setFalseAction']),
+    ...mapActions(['authenticate']),
     async login(values) {
       this.loginInSubmission = true;
       this.loginShowAlert = true;
       this.loginAlertVariant = 'bg-blue-500';
       this.loginAlertMsg = 'Please wait. We are logging you in';
-
       try {
         await this.authenticate(values);
       } catch (error) {
