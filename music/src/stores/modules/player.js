@@ -6,8 +6,14 @@ const state = () => ({
 });
 
 // getters
-const getters = {};
-
+const getters = {
+  playing: (state) => {
+    if (state.sound.playing) {
+      return state.sound.playing();
+    }
+    return false;
+  },
+};
 // actions
 const actions = {
   async newSong({ commit }, song) {

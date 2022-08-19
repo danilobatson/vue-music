@@ -8,7 +8,10 @@
     <div class="flex flex-nowrap gap-4 items-center">
       <!-- Play/Pause Button -->
       <button type="button" @click.prevent="toggleAudio">
-        <i class="fa fa-play text-gray-500 text-xl"></i>
+        <i
+          class="fa text-gray-500 text-xl"
+          :class="{ 'fa-play': !playing, 'fa-pause': playing }"
+        ></i>
       </button>
       <!-- Current Position -->
       <div class="player-currenttime">00:00</div>
@@ -34,12 +37,15 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Player',
   methods: {
     ...mapActions('player', ['toggleAudio']),
+  },
+  computed: {
+    ...mapGetters('player', ['playing']),
   },
 };
 </script>
