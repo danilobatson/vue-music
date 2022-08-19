@@ -1,8 +1,11 @@
 import { Howl } from 'howler';
+import helper from '@/includes/helper';
 
 const state = () => ({
   currentSong: {},
   sound: {},
+  seek: '00:00',
+  duration: '00:00',
 });
 
 // getters
@@ -19,6 +22,7 @@ const actions = {
   async newSong({ commit }, song) {
     commit('newSong', song);
     commit('playSong');
+    commit('progress');
   },
   async toggleAudio({ commit }) {
     commit('toggleAudio');
@@ -37,6 +41,17 @@ const mutations = {
   },
   playSong(state) {
     state.sound.play();
+    const progress = () => {
+      state.seek = helper.formatTime(state.sound.seek());
+      state.duration = helper.formatTime(state.sound.duration());
+
+      if (state.sound.playing()) {
+        requestAnimationFrame(progress);
+      }
+    };
+    state.sound.on('play', () => {
+      requestAnimationFrame(progress);
+    });
   },
   toggleAudio(state) {
     if (!state.sound.playing) {
