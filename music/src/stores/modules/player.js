@@ -6,6 +6,7 @@ const state = () => ({
   sound: {},
   seek: '00:00',
   duration: '00:00',
+  playerProgress: '0%',
 });
 
 // getters
@@ -32,6 +33,10 @@ const actions = {
 // mutations
 const mutations = {
   newSong(state, song) {
+    if (state.sound instanceof Howl) {
+      state.sound.unload();
+    }
+
     state.currentSong = song;
 
     state.sound = new Howl({
@@ -44,6 +49,10 @@ const mutations = {
     const progress = () => {
       state.seek = helper.formatTime(state.sound.seek());
       state.duration = helper.formatTime(state.sound.duration());
+
+      state.playerProgress = `${
+        (state.sound.seek() / state.sound.duration()) * 100
+      }%`;
 
       if (state.sound.playing()) {
         requestAnimationFrame(progress);
