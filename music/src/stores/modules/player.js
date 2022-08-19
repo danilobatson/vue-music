@@ -14,6 +14,9 @@ const actions = {
     commit('newSong', song);
     commit('playSong');
   },
+  async toggleAudio({ commit }) {
+    commit('toggleAudio');
+  },
 };
 
 // mutations
@@ -28,6 +31,16 @@ const mutations = {
   },
   playSong(state) {
     state.sound.play();
+  },
+  toggleAudio(state) {
+    if (!state.sound.playing) {
+      return;
+    }
+    if (state.sound.playing()) {
+      state.sound.pause();
+    } else {
+      state.sound.play();
+    }
   },
 };
 

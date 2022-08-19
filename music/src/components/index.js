@@ -5,6 +5,7 @@ import RegistrationForm from './RegistrationForm.vue';
 import CompositionItem from './CompositionItem.vue';
 import Upload from './Upload.vue';
 import SongItem from './SongItem.vue';
+import Player from './Player.vue';
 
 export {
   AppHeader,
@@ -14,4 +15,5 @@ export {
   RegistrationForm,
   CompositionItem,
   SongItem,
+  Player,
 };
