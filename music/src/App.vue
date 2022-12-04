@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { AppHeader, AppAuth, Player } from '@/components';
+import { AppHeader, AppAuth, Player } from '@/components'; 
 import { mapState } from 'vuex';
 import { auth } from './includes/firebase';
 export default {
